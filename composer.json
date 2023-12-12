@@ -31,15 +31,5 @@
     },
     "config": {
         "sort-packages": true
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "PacificSw\\LaravelInstaller\\LaravelInstallerServiceProvider"
-            ],
-            "aliases": {
-                "LaravelInstaller": "PacificSw\\LaravelInstaller\\LaravelInstallerFacade"
-            }
-        }
     }
 }
