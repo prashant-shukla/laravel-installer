@@ -1,16 +1,15 @@
 <?php
 
-
-namespace PrashantShukla\LaravelInstaller\Controllers;
+namespace PacificSw\LaravelInstaller\Controllers;
 
 use Illuminate\Routing\Controller;
-use PrashantShukla\LaravelInstaller\Helpers\DatabaseManager;
-use PrashantShukla\LaravelInstaller\Helpers\InstalledFileManager;
-use PrashantShukla\LaravelInstaller\Helpers\MigrationsHelper;
+use PacificSw\LaravelInstaller\Helpers\DatabaseManager;
+use PacificSw\LaravelInstaller\Helpers\InstalledFileManager;
 
 class UpdateController extends Controller
 {
-    use MigrationsHelper;
+    use \PacificSw\LaravelInstaller\Helpers\MigrationsHelper;
+
     /**
      * Display the updater welcome page.
      *
@@ -45,13 +44,13 @@ class UpdateController extends Controller
         $response = $databaseManager->migrateAndSeed();
 
         return redirect()->route('LaravelUpdater::final')
-            ->with(['message' => $response]);
+                         ->with(['message' => $response]);
     }
 
     /**
      * Update installed file and display finished view.
      *
-     * @param InstalledFileManager $fileManager
+     * @param  InstalledFileManager  $fileManager
      * @return \Illuminate\View\View
      */
     public function finish(InstalledFileManager $fileManager)

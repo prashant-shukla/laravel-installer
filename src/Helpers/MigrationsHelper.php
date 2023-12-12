@@ -1,7 +1,6 @@
 <?php
 
-
-namespace PrashantShukla\LaravelInstaller\Helpers;
+namespace PacificSw\LaravelInstaller\Helpers;
 
 use Illuminate\Support\Facades\DB;
 

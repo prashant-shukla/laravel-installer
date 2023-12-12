@@ -1,12 +1,9 @@
 <?php
 
-
-namespace PrashantShukla\LaravelInstaller\Helpers;
-
+namespace PacificSw\LaravelInstaller\Helpers;
 
 class InstalledFileManager
 {
-
     /**
      * Create installed file.
      *

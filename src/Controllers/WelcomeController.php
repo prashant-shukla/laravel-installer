@@ -1,23 +1,18 @@
 <?php
 
+namespace PacificSw\LaravelInstaller\Controllers;
 
-namespace PrashantShukla\LaravelInstaller\Controllers;
-
-
-use App\Http\Controllers\Controller;
-use PrashantShukla\LaravelInstaller\Helpers\ProgressHelper;
+use Illuminate\Routing\Controller;
 
 class WelcomeController extends Controller
 {
-    protected $ProgressBar;
-    public function __construct(ProgressHelper $ProgressBar)
-    {
-        $this->ProgressBar = $ProgressBar;
-
-    }
+    /**
+     * Display the installer welcome page.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function welcome()
     {
-        $this->ProgressBar->calculate_progess(3,config('installer.config.num_of_environment_steps'));
         return view('vendor.installer.welcome');
     }
 }

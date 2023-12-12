@@ -1,17 +1,14 @@
 <?php
 
-
-namespace PrashantShukla\LaravelInstaller\Controllers;
+namespace PacificSw\LaravelInstaller\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
-use PDO;
-use PrashantShukla\LaravelInstaller\Events\EnvironmentSaved;
-use PrashantShukla\LaravelInstaller\Helpers\EnvironmentManager;
-use PrashantShukla\LaravelInstaller\Helpers\ProgressHelper;
+use PacificSw\LaravelInstaller\Events\EnvironmentSaved;
+use PacificSw\LaravelInstaller\Helpers\EnvironmentManager;
 use Validator;
 
 class EnvironmentController extends Controller
@@ -20,33 +17,71 @@ class EnvironmentController extends Controller
      * @var EnvironmentManager
      */
     protected $EnvironmentManager;
-    protected $ProgressBar;
+
     /**
-     * @param EnvironmentManager $environmentManager
+     * @param  EnvironmentManager  $environmentManager
      */
-    public function __construct(EnvironmentManager $environmentManager,ProgressHelper $ProgressBar)
+    public function __construct(EnvironmentManager $environmentManager)
     {
         $this->EnvironmentManager = $environmentManager;
-        $this->ProgressBar = $ProgressBar;
     }
 
     /**
      * Display the Environment menu page.
+     *
      * @return \Illuminate\View\View
      */
     public function environmentMenu()
     {
-        $this->ProgressBar->update_session_data(3);
+        return view('vendor.installer.environment');
+    }
+
+    /**
+     * Display the Environment page.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function environmentWizard()
+    {
         $envConfig = $this->EnvironmentManager->getEnvContent();
+
         return view('vendor.installer.environment-wizard', compact('envConfig'));
     }
 
+    /**
+     * Display the Environment page.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function environmentClassic()
+    {
+        $envConfig = $this->EnvironmentManager->getEnvContent();
+
+        return view('vendor.installer.environment-classic', compact('envConfig'));
+    }
+
+    /**
+     * Processes the newly saved environment configuration (Classic).
+     *
+     * @param  Request  $input
+     * @param  Redirector  $redirect
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function saveClassic(Request $input, Redirector $redirect)
+    {
+        $message = $this->EnvironmentManager->saveFileClassic($input);
+
+        event(new EnvironmentSaved($input));
+
+        return $redirect->route('LaravelInstaller::environmentClassic')
+                        ->with(['message' => $message]);
+    }
 
     /**
      * Processes the newly saved environment configuration (Form Wizard).
      *
-     * @param Request $request
-     * @param Redirector $redirect
+     * @param  Request  $request
+     * @param  Redirector  $redirect
      * @return \Illuminate\Http\RedirectResponse
      */
     public function saveWizard(Request $request, Redirector $redirect)
@@ -55,7 +90,9 @@ class EnvironmentController extends Controller
         $messages = [
             'environment_custom.required_if' => trans('installer_messages.environment.wizard.form.name_required'),
         ];
+
         $validator = Validator::make($request->all(), $rules, $messages);
+
         if ($validator->fails()) {
             return $redirect->route('LaravelInstaller::environmentWizard')->withInput()->withErrors($validator->errors());
         }
@@ -71,62 +108,46 @@ class EnvironmentController extends Controller
         event(new EnvironmentSaved($request));
 
         return $redirect->route('LaravelInstaller::database')
-            ->with(['results' => $results]);
+                        ->with(['results' => $results]);
     }
 
     /**
+     * TODO: We can remove this code if PR will be merged: https://github.com/PacificSw/LaravelInstaller/pull/162
      * Validate database connection with user credentials (Form Wizard).
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return bool
      */
     private function checkDatabaseConnection(Request $request)
     {
-        $DB_CONNECTION = $request->input('DB_CONNECTION');
-        $DB_HOST = $request->input('DB_HOST');
-        $DB_PORT = $request->input('DB_PORT');
-        $DB_DATABASE = $request->input('DB_DATABASE');
-        $DB_USERNAME = $request->input('DB_USERNAME');
-        $DB_PASSWORD = $request->input('DB_PASSWORD');
+        $connection = $request->input('database_connection');
 
-      if((DB::connection()->getDatabaseName() != $DB_DATABASE) AND ($DB_CONNECTION=='mysql' OR $DB_CONNECTION=='MYSQL'))
-      {
-          $pdo = $this->getPDOConnection($DB_CONNECTION, $DB_HOST, $DB_PORT, $DB_USERNAME, $DB_PASSWORD);
-          $pdo->exec(sprintf('CREATE DATABASE IF NOT EXISTS %s ;', $DB_DATABASE));
-
-      }
-
-        $settings = config("database.connections.$DB_CONNECTION");
+        $settings = config("database.connections.$connection");
 
         config([
             'database' => [
-                'default' => $DB_CONNECTION,
+                'default' => $connection,
                 'connections' => [
-                    $DB_CONNECTION => array_merge($settings, [
-                        'driver' => $DB_CONNECTION,
-                        'host' => $request->input('DB_HOST'),
-                        'port' => $request->input('DB_PORT'),
-                        'database' => $request->input('DB_DATABASE'),
-                        'username' => $request->input('DB_USERNAME'),
-                        'password' => $request->input('DB_PASSWORD'),
+                    $connection => array_merge($settings, [
+                        'driver' => $connection,
+                        'host' => $request->input('database_hostname'),
+                        'port' => $request->input('database_port'),
+                        'database' => $request->input('database_name'),
+                        'username' => $request->input('database_username'),
+                        'password' => $request->input('database_password'),
                     ]),
                 ],
             ],
         ]);
+
         DB::purge();
 
         try {
             DB::connection()->getPdo();
+
             return true;
         } catch (Exception $e) {
             return false;
         }
-
-
-    }
-
-    private function getPDOConnection($driver,$host, $port, $username, $password)
-    {
-        return new PDO(sprintf($driver.':host=%s;port=%d;', $host, $port), $username, $password);
     }
 }

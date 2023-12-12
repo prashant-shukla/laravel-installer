@@ -1,11 +1,9 @@
 <?php
 
-
-namespace PrashantShukla\LaravelInstaller\Controllers;
-
+namespace PacificSw\LaravelInstaller\Controllers;
 
 use Illuminate\Routing\Controller;
-use PrashantShukla\LaravelInstaller\Helpers\DatabaseManager;
+use PacificSw\LaravelInstaller\Helpers\DatabaseManager;
 
 class DatabaseController extends Controller
 {
@@ -15,7 +13,7 @@ class DatabaseController extends Controller
     private $databaseManager;
 
     /**
-     * @param DatabaseManager $databaseManager
+     * @param  DatabaseManager  $databaseManager
      */
     public function __construct(DatabaseManager $databaseManager)
     {
@@ -29,9 +27,9 @@ class DatabaseController extends Controller
      */
     public function database()
     {
-
         $response = $this->databaseManager->migrateAndSeed();
+
         return redirect()->route('LaravelInstaller::final')
-            ->with(['message' => $response]);
+                         ->with(['message' => $response]);
     }
 }

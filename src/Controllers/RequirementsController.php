@@ -1,11 +1,9 @@
 <?php
 
-
-namespace PrashantShukla\LaravelInstaller\Controllers;
+namespace PacificSw\LaravelInstaller\Controllers;
 
 use Illuminate\Routing\Controller;
-use PrashantShukla\LaravelInstaller\Helpers\ProgressHelper;
-use PrashantShukla\LaravelInstaller\Helpers\RequirementsChecker;
+use PacificSw\LaravelInstaller\Helpers\RequirementsChecker;
 
 class RequirementsController extends Controller
 {
@@ -13,15 +11,13 @@ class RequirementsController extends Controller
      * @var RequirementsChecker
      */
     protected $requirements;
-    protected $ProgressBar;
 
     /**
-     * @param RequirementsChecker $checker
+     * @param  RequirementsChecker  $checker
      */
-    public function __construct(RequirementsChecker $checker,ProgressHelper $ProgressBar)
+    public function __construct(RequirementsChecker $checker)
     {
         $this->requirements = $checker;
-        $this->ProgressBar = $ProgressBar;
     }
 
     /**
@@ -37,7 +33,7 @@ class RequirementsController extends Controller
         $requirements = $this->requirements->check(
             config('installer.requirements')
         );
-        $this->ProgressBar->update_session_data(1);
+
         return view('vendor.installer.requirements', compact('requirements', 'phpSupportInfo'));
     }
 }

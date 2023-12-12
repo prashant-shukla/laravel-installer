@@ -1,7 +1,6 @@
 <?php
 
-
-namespace PrashantShukla\LaravelInstaller\Events;
+namespace PacificSw\LaravelInstaller\Events;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
@@ -17,7 +16,7 @@ class EnvironmentSaved
     /**
      * Create a new event instance.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return void
      */
     public function __construct(Request $request)

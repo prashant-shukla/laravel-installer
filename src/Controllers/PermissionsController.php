@@ -1,12 +1,9 @@
 <?php
 
-
-namespace PrashantShukla\LaravelInstaller\Controllers;
-
+namespace PacificSw\LaravelInstaller\Controllers;
 
 use Illuminate\Routing\Controller;
-use PrashantShukla\LaravelInstaller\Helpers\PermissionsChecker;
-use PrashantShukla\LaravelInstaller\Helpers\ProgressHelper;
+use PacificSw\LaravelInstaller\Helpers\PermissionsChecker;
 
 class PermissionsController extends Controller
 {
@@ -14,15 +11,13 @@ class PermissionsController extends Controller
      * @var PermissionsChecker
      */
     protected $permissions;
-    protected $ProgressBar;
 
     /**
-     * @param PermissionsChecker $checker
+     * @param  PermissionsChecker  $checker
      */
-    public function __construct(PermissionsChecker $checker,ProgressHelper $ProgressBar)
+    public function __construct(PermissionsChecker $checker)
     {
         $this->permissions = $checker;
-        $this->ProgressBar = $ProgressBar;
     }
 
     /**
@@ -35,7 +30,7 @@ class PermissionsController extends Controller
         $permissions = $this->permissions->check(
             config('installer.permissions')
         );
-        $this->ProgressBar->update_session_data(2);
+
         return view('vendor.installer.permissions', compact('permissions'));
     }
 }

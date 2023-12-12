@@ -1,11 +1,11 @@
 <?php
 
-Route::group(['prefix' => 'install', 'as' => 'LaravelInstaller::', 'namespace' => 'PrashantShukla\LaravelInstaller\Controllers', 'middleware' => ['web', 'install']], function () {
-
+Route::group(['prefix' => 'install', 'as' => 'LaravelInstaller::', 'namespace' => 'PacificSw\LaravelInstaller\Controllers', 'middleware' => ['web', 'install']], function () {
     Route::get('/', [
         'as' => 'welcome',
         'uses' => 'WelcomeController@welcome',
     ]);
+
     Route::get('environment', [
         'as' => 'environment',
         'uses' => 'EnvironmentController@environmentMenu',
@@ -19,6 +19,16 @@ Route::group(['prefix' => 'install', 'as' => 'LaravelInstaller::', 'namespace' =
     Route::post('environment/saveWizard', [
         'as' => 'environmentSaveWizard',
         'uses' => 'EnvironmentController@saveWizard',
+    ]);
+
+    Route::get('environment/classic', [
+        'as' => 'environmentClassic',
+        'uses' => 'EnvironmentController@environmentClassic',
+    ]);
+
+    Route::post('environment/saveClassic', [
+        'as' => 'environmentSaveClassic',
+        'uses' => 'EnvironmentController@saveClassic',
     ]);
 
     Route::get('requirements', [
@@ -40,18 +50,9 @@ Route::group(['prefix' => 'install', 'as' => 'LaravelInstaller::', 'namespace' =
         'as' => 'final',
         'uses' => 'FinalController@finish',
     ]);
-
-    Route::post('api/progress_url_add', [
-        'as' => 'apiProgress_url_add',
-        'uses' => 'ProgressBarController@add_session_complete_steps',
-    ]);
-    Route::post('api/progress_url_sub', [
-        'as' => 'apiProgress_url_sub',
-        'uses' => 'ProgressBarController@sub_session_complete_steps',
-    ]);
 });
 
-Route::group(['prefix' => 'update', 'as' => 'LaravelUpdater::', 'namespace' => 'PrashantShukla\LaravelInstaller\Controllers', 'middleware' => 'web'], function () {
+Route::group(['prefix' => 'update', 'as' => 'LaravelUpdater::', 'namespace' => 'PacificSw\LaravelInstaller\Controllers', 'middleware' => 'web'], function () {
     Route::group(['middleware' => 'update'], function () {
         Route::get('/', [
             'as' => 'welcome',

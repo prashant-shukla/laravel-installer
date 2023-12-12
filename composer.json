@@ -21,12 +21,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PrashantShukla\\LaravelInstaller\\": "src"
+            "PacificSw\\LaravelInstaller\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PrashantShukla\\LaravelInstaller\\Tests\\": "tests"
+            "PacificSw\\LaravelInstaller\\Tests\\": "tests"
         }
     },
     "config": {
@@ -35,10 +35,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "PrashantShukla\\LaravelInstaller\\LaravelInstallerServiceProvider"
+                "PacificSw\\LaravelInstaller\\LaravelInstallerServiceProvider"
             ],
             "aliases": {
-                "LaravelInstaller": "PrashantShukla\\LaravelInstaller\\LaravelInstallerFacade"
+                "LaravelInstaller": "PacificSw\\LaravelInstaller\\LaravelInstallerFacade"
             }
         }
     }

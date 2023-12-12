@@ -1,7 +1,6 @@
 <?php
 
-
-namespace PrashantShukla\LaravelInstaller\Events;
+namespace PacificSw\LaravelInstaller\Events;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
