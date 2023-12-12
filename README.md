@@ -66,7 +66,7 @@ If you discover any security related issues, please email mohammad.arif9999@gmai
 
 ## Credits
 
-- [Mohammad Arif](https://github.com/prashant-shukla) 
+- [Prashant Shukla](https://github.com/prashant-shukla) 
 - [Rachid Laasri](https://github.com/rashidlaasri) for core concept.
 - [Irving](https://github.com/irvingv8) for Layout design.
 - [All Contributors](../../contributors)
