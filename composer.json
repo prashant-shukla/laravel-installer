@@ -1,0 +1,46 @@
+    {
+    "name": "prashant-shukla/laravel-installer",
+    "description": "Laravel web Installation wizard",
+    "keywords": [
+        "prashant-shukla",
+        "laravel-installer"
+    ],
+    "homepage": "https://github.com/prashant-shukla/laravel-installer",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Prashant Shukla",
+            "email": "prashant.jod@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "ext-json": "*",
+        "ext-http": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "PrashantShukla\\LaravelInstaller\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PrashantShukla\\LaravelInstaller\\Tests\\": "tests"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "PrashantShukla\\LaravelInstaller\\LaravelInstallerServiceProvider"
+            ],
+            "aliases": {
+                "LaravelInstaller": "PrashantShukla\\LaravelInstaller\\LaravelInstallerFacade"
+            }
+        }
+    }
+}
