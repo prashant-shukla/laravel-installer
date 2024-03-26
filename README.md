@@ -1,8 +1,8 @@
 # Laravel web Installation wizard Package
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/pacificsw/laravel-installer.svg?style=flat-square)](https://packagist.org/packages/pacificsw/laravel-installer)
-[![Quality Score](https://img.shields.io/scrutinizer/g/pacificsw/laravel-installer.svg?style=flat-square)](https://scrutinizer-ci.com/g/pacificsw/laravel-installer)
-[![Total Downloads](https://img.shields.io/packagist/dt/pacificsw/laravel-installer.svg?style=flat-square)](https://packagist.org/packages/pacificsw/laravel-installer)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/PacificSw/laravel-installer.svg?style=flat-square)](https://packagist.org/packages/PacificSw/laravel-installer)
+[![Quality Score](https://img.shields.io/scrutinizer/g/PacificSw/laravel-installer.svg?style=flat-square)](https://scrutinizer-ci.com/g/PacificSw/laravel-installer)
+[![Total Downloads](https://img.shields.io/packagist/dt/PacificSw/laravel-installer.svg?style=flat-square)](https://packagist.org/packages/PacificSw/laravel-installer)
 
 ##### THIS PACKAGE IS STILL UNDER TESTING AND DEVELOPMENT
 
@@ -21,7 +21,7 @@ This package is built on top of the [rachidlaasri/laravel-installer](https://git
 You can install the package via composer:
 
 ```bash
-composer require pacificsw/laravel-installer
+composer require PacificSw/laravel-installer
 ```
 Register the package
     Laravel 5.5 and up Uses package auto discovery feature, no need to edit the config/app.php file.
@@ -29,7 +29,7 @@ Register the package
 Laravel 5.4 and below Register the package with laravel in config/app.php under providers with the following:
 ```bash
 'providers' => [
-	    pacificsw\LaravelInstaller\LaravelInstallerServiceProvider::class,
+	    PacificSw\LaravelInstaller\LaravelInstallerServiceProvider::class,
 	];
 ```
 

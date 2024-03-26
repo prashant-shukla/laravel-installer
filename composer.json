@@ -1,8 +1,8 @@
     {
-    "name": "pacificsw/laravel-installer",
+    "name": "PacificSw/laravel-installer",
     "description": "Laravel web Installation wizard",
     "keywords": [
-        "pacificsw",
+        "PacificSw",
         "laravel-installer"
     ],
     "homepage": "https://github.com/prashant-shukla/laravel-installer",
