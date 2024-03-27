@@ -1,14 +1,14 @@
 # Laravel Web Installer
 Laravel Web Installer is a Laravel package that allows you to install your application easily, without having to worry about setting up your environment before starting with the installation process.
 
-[![Latest Stable Version](http://poser.pugx.org/pacificsw/web-installer/v)](https://packagist.org/packages/pacificsw/web-installer) [![Total Downloads](http://poser.pugx.org/pacificsw/web-installer/downloads)](https://packagist.org/packages/pacificsw/web-installer) [![Latest Unstable Version](http://poser.pugx.org/pacificsw/web-installer/v/unstable)](https://packagist.org/packages/pacificsw/web-installer) [![License](http://poser.pugx.org/pacificsw/web-installer/license)](https://packagist.org/packages/pacificsw/web-installer) [![PHP Version Require](http://poser.pugx.org/pacificsw/web-installer/require/php)](https://packagist.org/packages/pacificsw/web-installer)
+[![Latest Stable Version](http://poser.pugx.org/pacificsw/laravel-installer/v)](https://packagist.org/packages/pacificsw/laravel-installer) [![Total Downloads](http://poser.pugx.org/pacificsw/laravel-installer/downloads)](https://packagist.org/packages/pacificsw/laravel-installer) [![Latest Unstable Version](http://poser.pugx.org/pacificsw/laravel-installer/v/unstable)](https://packagist.org/packages/pacificsw/laravel-installer) [![License](http://poser.pugx.org/pacificsw/laravel-installer/license)](https://packagist.org/packages/pacificsw/laravel-installer) [![PHP Version Require](http://poser.pugx.org/pacificsw/laravel-installer/require/php)](https://packagist.org/packages/pacificsw/laravel-installer)
 ## Installation 
 ```bash
-composer require pacificsw/web-installer
+composer require pacificsw/laravel-installer
 ```
 then publish the assets
 ```bash
-php artisan vendor:publish --tag=web-installer-assets
+php artisan vendor:publish --tag=laravel-installer-assets
  ```
 
 ## Screenshots
@@ -88,5 +88,5 @@ public function panel(Panel $panel): Panel
 you can modify almost everything in this package. For this you have to publish the config file. Eg:
 
 ```bash
-php artisan vendor:publish --tag=web-installer-config
+php artisan vendor:publish --tag=laravel-installer-config
 ```
