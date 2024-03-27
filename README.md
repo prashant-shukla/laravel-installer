@@ -1,10 +1,10 @@
 # Laravel Web Installer
 Laravel Web Installer is a Laravel package that allows you to install your application easily, without having to worry about setting up your environment before starting with the installation process.
 
-[![Latest Stable Version](http://poser.pugx.org/shipu/web-installer/v)](https://packagist.org/packages/shipu/web-installer) [![Total Downloads](http://poser.pugx.org/shipu/web-installer/downloads)](https://packagist.org/packages/shipu/web-installer) [![Latest Unstable Version](http://poser.pugx.org/shipu/web-installer/v/unstable)](https://packagist.org/packages/shipu/web-installer) [![License](http://poser.pugx.org/shipu/web-installer/license)](https://packagist.org/packages/shipu/web-installer) [![PHP Version Require](http://poser.pugx.org/shipu/web-installer/require/php)](https://packagist.org/packages/shipu/web-installer)
+[![Latest Stable Version](http://poser.pugx.org/pacificsw/web-installer/v)](https://packagist.org/packages/pacificsw/web-installer) [![Total Downloads](http://poser.pugx.org/pacificsw/web-installer/downloads)](https://packagist.org/packages/pacificsw/web-installer) [![Latest Unstable Version](http://poser.pugx.org/pacificsw/web-installer/v/unstable)](https://packagist.org/packages/pacificsw/web-installer) [![License](http://poser.pugx.org/pacificsw/web-installer/license)](https://packagist.org/packages/pacificsw/web-installer) [![PHP Version Require](http://poser.pugx.org/pacificsw/web-installer/require/php)](https://packagist.org/packages/pacificsw/web-installer)
 ## Installation 
 ```bash
-composer require shipu/web-installer
+composer require pacificsw/web-installer
 ```
 then publish the assets
 ```bash
