@@ -1,81 +1,92 @@
-# Laravel web Installation wizard Package
+# Laravel Web Installer
+Laravel Web Installer is a Laravel package that allows you to install your application easily, without having to worry about setting up your environment before starting with the installation process.
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/PacificSw/laravel-installer.svg?style=flat-square)](https://packagist.org/packages/PacificSw/laravel-installer)
-[![Quality Score](https://img.shields.io/scrutinizer/g/PacificSw/laravel-installer.svg?style=flat-square)](https://scrutinizer-ci.com/g/PacificSw/laravel-installer)
-[![Total Downloads](https://img.shields.io/packagist/dt/PacificSw/laravel-installer.svg?style=flat-square)](https://packagist.org/packages/PacificSw/laravel-installer)
+[![Latest Stable Version](http://poser.pugx.org/shipu/web-installer/v)](https://packagist.org/packages/shipu/web-installer) [![Total Downloads](http://poser.pugx.org/shipu/web-installer/downloads)](https://packagist.org/packages/shipu/web-installer) [![Latest Unstable Version](http://poser.pugx.org/shipu/web-installer/v/unstable)](https://packagist.org/packages/shipu/web-installer) [![License](http://poser.pugx.org/shipu/web-installer/license)](https://packagist.org/packages/shipu/web-installer) [![PHP Version Require](http://poser.pugx.org/shipu/web-installer/require/php)](https://packagist.org/packages/shipu/web-installer)
+## Installation 
+```bash
+composer require shipu/web-installer
+```
+then publish the assets
+```bash
+php artisan vendor:publish --tag=web-installer-assets
+ ```
 
-##### THIS PACKAGE IS STILL UNDER TESTING AND DEVELOPMENT
+## Screenshots
+![Server Requirements](https://raw.githubusercontent.com/Shipu/web-installer/master/screenshots/installer_1.png)
 
-This package is built on top of the [rachidlaasri/laravel-installer](https://github.com/rashidlaasri/LaravelInstaller) package, This package just overcomes some issues that I faced during my project development such as adding new environment elements in installation wizard form and validation of new variables. This package is specially focused to use after the final build of the project, it will use .env.excample file as a template for updating .env file.
+![Folder Permissions](https://raw.githubusercontent.com/Shipu/web-installer/master/screenshots/installer_2.png)
 
-##### key Feature:
+![Environment](https://raw.githubusercontent.com/Shipu/web-installer/master/screenshots/installer_3.png)
 
-1-It will use you predefined environment keys from .env.example.
+![Application Settings](https://raw.githubusercontent.com/Shipu/web-installer/master/screenshots/installer_4.png)
 
-2-Easy to expand set of environment keys and validations.
+## Add New Step
+You can add new step in installer. For this you have to create a new class and implement `Pacificsw\WebInstaller\Concerns\StepContract` class. Eg:
 
-3-Multi-lingual support.
+```php
+<?php
 
-## Installation
+namespace Your\Namespace;
 
-You can install the package via composer:
+use Filament\Forms\Components\Wizard\Step;
+use Pacificsw\WebInstaller\Concerns\StepContract;
+
+class Overview implements StepContract
+{
+    public static function make(): Step
+    {
+        return Step::make('overview')
+            ->label('Overview')
+            ->schema([
+             // Add Filament Fields Here
+            ]);
+    }
+}
+```
+For `Step` documentation please visit [Filament Forms](https://filamentphp.com/docs/3.x/forms/layout/wizard)
+
+Then you have to add this class in `config/installer.php` Eg:
+
+```php
+//...
+'steps' => [
+    Overview::class, // <-- Add Here
+    //...
+],
+//...
+```
+Note: you have to publish config file first. More details in [Configuration](#configuration) section.
+
+## Protect Routes
+
+Protect other routes if not installed then you can apply the middleware to a route or route-group. Eg:
+
+```php
+Route::group(['middleware' => 'redirect.if.not.installed'], function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+});
+```
+
+In Filament, if you want to protect all admin panel routes then you have to add middleware in panel service provider. Eg:
+
+```php
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        ...
+        ->middleware([
+            \Pacificsw\WebInstaller\Middleware\RedirectIfNotInstalled::class,
+            ...
+        ]);
+}
+```
+
+## Configuration
+
+you can modify almost everything in this package. For this you have to publish the config file. Eg:
 
 ```bash
-composer require PacificSw/laravel-installer
+php artisan vendor:publish --tag=web-installer-config
 ```
-Register the package
-    Laravel 5.5 and up Uses package auto discovery feature, no need to edit the config/app.php file.
-
-Laravel 5.4 and below Register the package with laravel in config/app.php under providers with the following:
-```bash
-'providers' => [
-	    PacificSw\LaravelInstaller\LaravelInstallerServiceProvider::class,
-	];
-```
-
-Publish the packages views, config file, assets, and language files by running the following from your projects root folder:
-```bash
-php artisan vendor:publish --tag=laravel-installer
-```
-
-## Usage
-
-Install Routes Notes
-
-In order to install your application, go to the /install route and follow the instructions.
-Once the installation has run the empty file installed will be placed into the /storage directory. If this file is present the route /install will abort to the 404 page.
-Update Route Notes
-
-In order to update your application, go to the /update route and follow the instructions.
-The /update routes count how many migration files exist in the /database/migrations folder and compares that count against the migrations table. If the files count is greater then the /update route will render, otherwise, the page will abort to the 404 page.
-Additional Files and folders published to your project :
-
-
-
-### Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
-
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-### Security
-
-If you discover any security related issues, please email mohammad.arif9999@gmail.com instead of using the issue tracker.
-
-## Credits
-
-- [Prashant Shukla](https://github.com/prashant-shukla) 
-- [Rachid Laasri](https://github.com/rashidlaasri) for core concept.
-- [Irving](https://github.com/irvingv8) for Layout design.
-- [All Contributors](../../contributors)
-
-
-## License
-
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
-## Laravel Package Boilerplate
-
-This package was generated using the [Laravel Package Boilerplate](https://laravelpackageboilerplate.com).

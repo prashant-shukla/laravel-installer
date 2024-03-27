@@ -1,35 +1,36 @@
-    {
-    "name": "PacificSw/laravel-installer",
-    "description": "Laravel web Installation wizard",
-    "keywords": [
-        "PacificSw",
-        "laravel-installer"
-    ],
-    "homepage": "https://github.com/prashant-shukla/laravel-installer",
-    "license": "MIT",
+{
+    "name": "pacificsw/web-installer",
+    "description": "Laravel/FilamentPHP Web Installer",
     "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "Prashant Shukla",
-            "email": "prashant.jod@gmail.com",
-            "role": "Developer"
+            "email": "prashant.jod@gmail.com"
         }
     ],
-    "require": {
-        "php": ">=7.1",
-        "ext-json": "*" 
-    },
     "autoload": {
-        "psr-4": {
-            "PacificSw\\LaravelInstaller\\": "src"
-        }
+            "psr-4": {
+                "Pacificsw\\WebInstaller\\": "src/"
+            }
+        },
+    "require": {
+        "spatie/laravel-package-tools": "^1.9",
+        "livewire/livewire": "^3.0@beta",
+        "filament/forms": "^3.0-stable",
+        "filament/support": "^3.0-stable",
+        "laravel/helpers": "^1.6"
     },
-    "autoload-dev": {
-        "psr-4": {
-            "PacificSw\\LaravelInstaller\\Tests\\": "tests"
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Pacificsw\\WebInstaller\\WebInstallerServiceProvider"
+            ],
+            "aliases": {
+
+            }
         }
-    },
-    "config": {
-        "sort-packages": true
     }
 }
